@@ -4,3 +4,4 @@ document.querySelectorAll('.story-btn').forEach(btn => {
     btn.nextElementSibling.classList.toggle('change')
   })
 })
+

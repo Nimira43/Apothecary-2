@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="./images/TheFavicon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Quaestio</title>
+</head>
+<body>
+  <div class="container">
+    <div class="screen active" id="start-screen">
+      <h1>Quaestio</h1>
+      <button id="start-btn">Start</button>
+    </div>
+    <div class="screen" id="quiz-screen">
+      <div class="quiz-header">
+        <h2 id="question-text">Question</h2>
+        <div class="quiz-info">
+          <p>
+            Question 
+            <span id="current-question">1</span>
+            of
+            <span id="total-questions">50</span>
+          </p>
+          <p>
+            Score:
+            <span id="score">0</span>
+          </p>
+        </div>
+      </div>
+      <div id="answers-container" class="answers-container">
+        <button class="answer-btn">Answer</button>
+      </div>
+      <div class="progress-bar">
+        <div id="progress" class="progress"></div>
+      </div>
+    </div>
+    <div id="result-screen" class="screen">
+      <h1>Results</h1>
+      <div class="result-info">
+        <p>
+          Score:
+          <span id="final-score">0</span>
+          /
+          <span id="max-score">50</span>
+        </p>
+        <div id="result-message">Well Done</div>
+      </div>
+      <button id="restart-btn">Restart</button>
+    </div>
+  
+  </div>
+  <script src="./script.js" type="module"></script>
+</body>
+</html>

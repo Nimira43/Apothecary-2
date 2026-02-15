@@ -35,6 +35,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: var(--dark);
+}
+
 .container {
   width: 100%;
   overflow-x: hidden;
@@ -495,5 +499,74 @@ html {
   .game {
     margin: 5rem 0;
   }
+}
+
+.footer {
+  background: var(--dark);
+  padding: 4rem 2rem;
+  margin-top: 6rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--light);
+  font-family: var(--main-font);
+}
+
+.footer-title {
+  font-family: var(--logo-font);
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-size: 1rem;
+  color: var(--grey-3);
+  margin-bottom: 2rem;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-icon {
+  font-size: 1.8rem;
+  color: var(--grey-3);
+  transition: color var(--transition-medium), transform var(--transition-fast);
+}
+
+.footer-icon:hover {
+  color: var(--light);
+  transform: translateY(-4px);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-links a {
+  color: var(--grey-3);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color var(--transition-medium);
+}
+
+.footer-links a:hover {
+  color: var(--light);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: var(--grey-4);
+  margin-top: 1rem;
 }
 

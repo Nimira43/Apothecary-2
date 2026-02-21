@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Poppins', sans-serif;
+}
+
+.cosmos {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.stars,
+.stars2,
+.stars3 {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: -10;
+  animation: drift 120s linear infinite;
+}
+
+.stars {
+  background-image:
+    radial-gradient(2px 2px at 20% 20%, #fff, transparent),
+    radial-gradient(2px 2px at 80% 60%, #fff, transparent),
+    radial-gradient(2px 2px at 50% 90%, #fff, transparent);
+}
+
+.stars2 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 40%, #9cf, transparent),
+    radial-gradient(1.5px 1.5px at 70% 80%, #9cf, transparent);
+  animation-duration: 180s;
+  opacity: 0.25;
+}
+
+.stars3 {
+  background-image:
+    radial-gradient(1px 1px at 30% 10%, #fdfdfd, transparent),
+    radial-gradient(1px 1px at 90% 50%, #fdfdfd, transparent);
+  animation-duration: 240s;
+  opacity: 0.15;
+}
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.nebula {
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 0, 150, 0.15), transparent 70%),
+    radial-gradient(circle at 70% 60%, rgba(0, 150, 255, 0.15), transparent 70%);
+  filter: blur(80px);
+  animation: nebulaMove 200s linear infinite;
+  z-index: -20;
+}
+
+@keyframes nebulaMove {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(-30%, -20%) scale(1.2);
+  }
+}
+
+.universe {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, #4b9cff, #020b1f);
+  box-shadow: 0 0 40px rgba(100, 180, 255, 0.7);
+  animation: pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.explosion {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 150, 0, 0.6), transparent 70%);
+  pointer-events: none;
+  animation: explode 1.2s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.wormhole {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4b9cff, #020b1f);
+  filter: blur(4px);
+  opacity: 0.4;
+  animation: wormPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes wormPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 0.7;
+  }
+}
+
+.lightning {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  animation: lightningFlash 8s infinite;
+}
+
+@keyframes lightningFlash {
+
+  0%,
+  97%,
+  100% {
+    opacity: 0;
+  }
+
+  98% {
+    opacity: 0.8;
+  }
+}

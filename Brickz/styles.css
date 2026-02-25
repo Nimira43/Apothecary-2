@@ -5,15 +5,6 @@
   --logo-font: 'Protest Revolution', sans-serif;
   --dark: #111;
   --light: #fffdfa;
-  --grey-1: #333;
-  --grey-2: #999;
-  --grey-3: #ccc;
-  --grey-4: #eee;
-  --grey-5: #fafafa;
-  --shadow-1: #0a0a0a;
-  --shadow-2: #323232;
-  --shadow-3: #050505;
-  --shadow-4: #222;
   --transitioning: all 0.5s ease-in-out;
 }
 
@@ -24,7 +15,6 @@
 }
 
 body {
-  
   background-color: var(--dark);
   display: flex;
   flex-direction: column;
@@ -38,6 +28,12 @@ h1 {
   font-size: 45px;
   font-family: 'Protest Revolution', sans-serif;
   color: var(--light);
+}
+
+canvas {
+  background: var(--dark);
+  display: block;
+  border: 1px solid var(--light);
 }
 
 .btn {

@@ -60,7 +60,20 @@ function drawPaddle() {
 }
 
 function drawScore() { }
-function drawBricks() { }
+
+function drawBricks() { 
+  bricks.forEach(column => {
+    column.forEach(brick => {
+      ctx.beginPath()
+      ctx.rect(brick.x, brick.y, brick.w, brick.h)
+      ctx.fillStyle = brick.visible 
+        ? '#fffdfa'
+        : 'transparent'
+      ctx.fill()
+      ctx.closePath()
+    })
+  })
+}
 
 function movePaddle() { 
   paddle.x += paddle.dx
@@ -76,12 +89,18 @@ function movePaddle() {
 
 function moveBall() { }
 function increaseScore() { }
-function showAllBricks() { }
+
+function showAllBricks() { 
+  bricks.forEach(column => {
+    column.forEach(brick => (brick.visible = true))
+  })
+}
 
 function draw() { 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
   drawPaddle()
+  drawBricks()
 }
 
 function update() { 

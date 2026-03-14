@@ -5,6 +5,8 @@ const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
 let score = 0
+let lives = 5
+let gameOver = false
 
 const brickRowCount = 9
 const brickColumnCount = 5
@@ -49,7 +51,13 @@ for (let i = 0; i < brickRowCount; i++) {
   }
 }
 
-function drawBall() { }
+function drawBall() {
+  ctx.beginPath()
+  ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2)
+  ctx.fillStyle = ball.visible ? '#fffdfa' : 'transparent'
+  ctx.fill()
+  ctx.closePath()
+}
 
 function drawPaddle() {
   ctx.beginPath()
@@ -59,23 +67,31 @@ function drawPaddle() {
   ctx.closePath()
 }
 
-function drawScore() { }
+function drawScore() {
+  ctx.font = '20px Arial'
+  ctx.fillStyle = '#fffdfa'
+  ctx.fillText(`Score: ${score}`, canvas.width - 120, 30)
+}
 
-function drawBricks() { 
+function drawLives() {
+  ctx.font = '20px Arial'
+  ctx.fillStyle = '#fffdfa'
+  ctx.fillText(`Lives: ${lives}`, 20, 30)
+}
+
+function drawBricks() {
   bricks.forEach(column => {
     column.forEach(brick => {
       ctx.beginPath()
       ctx.rect(brick.x, brick.y, brick.w, brick.h)
-      ctx.fillStyle = brick.visible 
-        ? '#fffdfa'
-        : 'transparent'
+      ctx.fillStyle = brick.visible ? '#fffdfa' : 'transparent'
       ctx.fill()
       ctx.closePath()
     })
   })
 }
 
-function movePaddle() { 
+function movePaddle() {
   paddle.x += paddle.dx
 
   if (paddle.x + paddle.w > canvas.width) {
@@ -87,23 +103,112 @@ function movePaddle() {
   }
 }
 
-function moveBall() { }
-function increaseScore() { }
+function moveBall() {
+  if (gameOver) return
 
-function showAllBricks() { 
+  ball.x += ball.dx
+  ball.y += ball.dy
+
+  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+    ball.dx *= -1
+  }
+
+  if (ball.y - ball.size < 0) {
+    ball.dy *= -1
+  }
+
+  if (
+    ball.x - ball.size > paddle.x &&
+    ball.x + ball.size < paddle.x + paddle.w &&
+    ball.y + ball.size > paddle.y
+  ) {
+    ball.dy = -ball.speed
+  }
+
+  bricks.forEach(column => {
+    column.forEach(brick => {
+      if (brick.visible) {
+        if (
+          ball.x - ball.size > brick.x &&
+          ball.x + ball.size < brick.x + brick.w &&
+          ball.y + ball.size > brick.y &&
+          ball.y - ball.size < brick.y + brick.h
+        ) {
+          ball.dy *= -1
+          brick.visible = false
+          increaseScore()
+        }
+      }
+    })
+  })
+
+  if (ball.y + ball.size > canvas.height) {
+    loseLife()
+  }
+}
+
+function loseLife() {
+  lives--
+
+  if (lives <= 0) {
+    gameOver = true
+    ball.visible = false
+    paddle.visible = false
+    return
+  }
+
+  resetBall()
+}
+
+function resetBall() {
+  ball.x = canvas.width / 2
+  ball.y = canvas.height / 2
+  ball.dx = 4
+  ball.dy = -4
+}
+
+function increaseScore() {
+  score++
+
+  if (score % (brickRowCount * brickColumnCount) === 0) {
+    ball.visible = false
+    paddle.visible = false
+
+    setTimeout(() => {
+      showAllBricks()
+      score = 0
+      resetBall()
+      ball.visible = true
+      paddle.visible = true
+    }, delay)
+  }
+}
+
+function showAllBricks() {
   bricks.forEach(column => {
     column.forEach(brick => (brick.visible = true))
   })
 }
 
-function draw() { 
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+  drawBall()
   drawPaddle()
+  drawScore()
+  drawLives()
   drawBricks()
+
+  if (gameOver) {
+    ctx.font = '50px Protest Revolution'
+    ctx.fillStyle = '#fffdfa'
+    ctx.fillText('GAME OVER', canvas.width / 2 - 150, canvas.height / 2)
+    ctx.font = '20px Arial'
+    ctx.fillText('Press SPACE to restart', canvas.width / 2 - 120, canvas.height / 2 + 40)
+  }
 }
 
-function update() { 
+function update() {
   movePaddle()
   moveBall()
   draw()
@@ -112,14 +217,25 @@ function update() {
 
 update()
 
-function keyDown(e) { 
+function keyDown(e) {
   if (e.key === 'Right' || e.key === 'ArrowRight') {
     paddle.dx = paddle.speed
   } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
     paddle.dx = -paddle.speed
   }
+
+  if (e.code === 'Space' && gameOver) {
+    lives = 5
+    score = 0
+    gameOver = false
+    showAllBricks()
+    resetBall()
+    ball.visible = true
+    paddle.visible = true
+  }
 }
-function keyUp(e) { 
+
+function keyUp(e) {
   if (
     e.key === 'Right' ||
     e.key === 'ArrowRight' ||
